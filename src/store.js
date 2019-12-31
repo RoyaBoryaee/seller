@@ -18,12 +18,19 @@ export default new Vuex.Store({
     },
     updateAccessToken: (state, accessToken) => {
       state.accessToken = accessToken;
-    }
+    },
+    logout(state) {
+      state.accessToken = "";
+    },
+  },
+  getters: {
+    isLoggedIn: state => !!state.accessToken
   },
   actions: {
-    doLogin({ commit }, loginData) {
-      commit('loginStart');
 
+    doLogin({ commit }, loginData) {
+      
+      return new Promise((resolve, reject) => {
       axios.post('https://reqres.in/api/login', {
         ...loginData
       })
@@ -31,11 +38,26 @@ export default new Vuex.Store({
           localStorage.setItem('accessToken', response.data.token);
           commit('loginStop', null);
           commit('updateAccessToken', response.data.token);
+          resolve(response)
         })
-        .catch(error => {
-          commit('loginStop', error.response.data.error);
-          commit('updateAccessToken', null);
+        .catch(reject)
+      });
+    },
+    doSignup({commit} ,signupData) {
+      return new Promise((resolve , reject) => {
+        axios
+        .post('https://reqres.in/api/signup',{
+          ...signupData
         })
+        .then(response => {
+          localStorage.setItem('accessToken', response.data.token);
+          commit('loginStop', null);
+          commit('updateAccessToken', response.data.token);
+          resolve(response.data)
+        })
+        .catch(reject)
+      })
+
     },
     fetchAccessToken({ commit }) {
       commit('updateAccessToken', localStorage.getItem('accessToken'));

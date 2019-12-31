@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
 
 // Containers
 const DefaultContainer = () => import('@/containers/DefaultContainer');
@@ -67,11 +68,12 @@ const User = () => import('@/views/users/User');
 const Newchart =() => import('@/views/charts/newchart');
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'hash', // https://router.vuejs.org/api/#mode
   linkActiveClass: 'open active',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
+    { path: '*', redirect: '/' },
     {
       path: '/',
       redirect: '/dashboard',
@@ -374,4 +376,23 @@ export default new Router({
     }
 
   ]
-})
+});
+router.beforeEach((to, from, next) => {
+  console.log("hello",to)
+  if (to.name === "Dashboard") {
+    console.log(store.getters["isLoggedIn"],"fuuucl")
+    if (store.getters['isLoggedIn']) {
+     
+      next();
+    } else {
+      next({
+        path: '/pages/login',
+        query: { redirect: to.fullPath }
+      });
+    }
+  } else {
+    next();
+  }
+});
+
+export default router;

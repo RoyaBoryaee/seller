@@ -6,13 +6,13 @@
             <b-card-group>
               <b-card no-body class="p-4">
                 <b-card-body>
-                  <b-form @click.prevent="loginSubmit">
+                  <b-form >
                     <h1>Login</h1>
                     <p class="text-muted">Sign In to your account</p>
                     <b-input-group class="mb-3">
                       <b-input-group-prepend><b-input-group-text><i class="icon-user"></i></b-input-group-text></b-input-group-prepend>
                       <b-form-input type="text" class="form-control" placeholder="Username" autocomplete="username email" v-model="Username" :class="{ 'is-invalid': submitted && !Username }"/>
-                      <div v-show="submitted && !username" class="invalid-feedback">Username is required</div>
+                      <div v-show="submitted && !Username" class="invalid-feedback">Username is required</div>
                     </b-input-group>
                     <b-input-group class="mb-4">
                       <b-input-group-prepend><b-input-group-text><i class="icon-lock"></i></b-input-group-text></b-input-group-prepend>
@@ -20,7 +20,7 @@
                     </b-input-group>
                     <b-row>
                       <b-col cols="6">
-                        <b-button variant="primary" class="px-4">Login</b-button>
+                        <b-button variant="primary" class="px-4" @click="loginSubmit">Login</b-button>
 
                       </b-col>
                       <b-col cols="6" class="text-right">
@@ -66,15 +66,17 @@
             ])
         },
         methods: {
-            ...mapActions([
-                'doLogin'
-            ]),
             loginSubmit() {
                 this.submitted = true;
-                this.doLogin({
-                    username: this.Username,
-                    password: this.Password
-                });
+                console.log(this.Username)
+                this.$store.dispatch("doLogin",{"username" : this.Username,"password": this.Password})
+                .then(() => {
+                     this.$router.push({ name: "Home" });
+                })
+                .catch( error => {
+                  alert(error.message)
+
+                })
             }
         }
 

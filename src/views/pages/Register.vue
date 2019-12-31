@@ -12,31 +12,31 @@
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-user"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="text" class="form-control" placeholder="Username" autocomplete="username" />
+                  <b-form-input type="text" class="form-control" placeholder="Username" v-model="username" autocomplete="username" />
                 </b-input-group>
 
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
                     <b-input-group-text>@</b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="text" class="form-control" placeholder="Email" autocomplete="email" />
+                  <b-form-input type="text" class="form-control" placeholder="Email" v-model="email" autocomplete="email" />
                 </b-input-group>
 
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="password" class="form-control" placeholder="Password" autocomplete="new-password" />
+                  <b-form-input type="password" class="form-control" placeholder="Password" v-model="password" autocomplete="new-password" />
                 </b-input-group>
 
                 <b-input-group class="mb-4">
                   <b-input-group-prepend>
                     <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="password" class="form-control" placeholder="Repeat password" autocomplete="new-password" />
+                  <b-form-input type="password" class="form-control" placeholder="Repeat password" v-model="repPassword" autocomplete="new-password" />
                 </b-input-group>
 
-                <b-button variant="success" block>Create Account</b-button>
+                <b-button variant="success" @click="signup" block>Create Account</b-button>
               </b-form>
             </b-card-body>
             <b-card-footer class="p-4">
@@ -53,11 +53,51 @@
         </b-col>
       </b-row>
     </div>
+    <div v-if="message" class="alert alert-primary" role="alert">
+  This is a primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+</div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
-  name: 'Register'
+  name: 'Register',
+    data(){
+            return {
+                username : "",
+                password : "",
+                repPassword : "",
+                email : "",
+                message : false,
+                
+            }
+        },
+        computed: {
+            ...mapState([
+                'accessToken'
+            ])
+        },
+        methods : {
+          signup(){
+            console.log("here")
+              this.$store.dispatch("doSignup",{"username" : this.username , "password" : this.password , "email" : this.email})
+              .then(Response => {
+                this.$store.dispatch("doLogin",{"username" : Response.username , "password" : Response.password})
+                .then(() => {
+                    this.$router.push({ name: "Home" });
+                })
+                .catch(error => {
+              
+                   alert(error.message)
+
+                })
+
+              })
+              .catch(() => {
+
+              })
+          }
+        }
 }
 </script>

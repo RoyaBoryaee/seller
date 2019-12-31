@@ -13,7 +13,6 @@
         <b-nav-item class="px-3" to="/pages/login">Logout</b-nav-item>
       </b-navbar-nav>
       <b-navbar-nav class="ml-auto">
-        <DefaultHeaderDropdownAccnt/>
       </b-navbar-nav>
       <AsideToggler class="d-none d-lg-block">
       </AsideToggler>
@@ -45,7 +44,6 @@
     import nav from '@/_nav'
     import { Header as AppHeader, SidebarToggler, Sidebar as AppSidebar, SidebarFooter, SidebarForm, SidebarHeader, SidebarMinimizer, SidebarNav, Aside as AppAside, AsideToggler, Footer as TheFooter, Breadcrumb } from '@coreui/vue'
     import DefaultAside from './DefaultAside'
-    import DefaultHeaderDropdownAccnt from './DefaultHeaderDropdownAccnt'
 
     export default {
         name: 'DefaultContainer',
@@ -57,7 +55,6 @@
             TheFooter,
             Breadcrumb,
             DefaultAside,
-            DefaultHeaderDropdownAccnt,
             SidebarForm,
             SidebarFooter,
             SidebarToggler,
