@@ -29,11 +29,9 @@ export default new Vuex.Store({
   actions: {
 
     doLogin({ commit }, loginData) {
-      
+      console.log(loginData)
       return new Promise((resolve, reject) => {
-      axios.post('https://reqres.in/api/login', {
-        ...loginData
-      })
+      axios.post('/salesmans/login/', loginData)
         .then(response => {
           localStorage.setItem('accessToken', response.data.token);
           commit('loginStop', null);
@@ -46,9 +44,7 @@ export default new Vuex.Store({
     doSignup({commit} ,signupData) {
       return new Promise((resolve , reject) => {
         axios
-        .post('https://reqres.in/api/signup',{
-          ...signupData
-        })
+        .post('/salesmans/register/',signupData)
         .then(response => {
           localStorage.setItem('accessToken', response.data.token);
           commit('loginStop', null);

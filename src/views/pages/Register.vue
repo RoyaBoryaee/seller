@@ -5,99 +5,203 @@
         <b-col md="6" sm="8">
           <b-card no-body class="mx-4">
             <b-card-body class="p-4">
+              <b-button @click="goBack"  class="btn btn-primary" type="button">
+                <i style="padding-right:5px;" class="cil-arrow-left"></i>ورود
+              </b-button>
               <b-form>
-                <h1>Register</h1>
-                <p class="text-muted">Create your account</p>
+                <h1 style="padding-top:10px;">ثبت نام</h1>
+                <p class="text-muted">ساختن حساب کاربری</p>
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
-                    <b-input-group-text><i class="icon-user"></i></b-input-group-text>
+                    <b-input-group-text>
+                      
+                      <i class="icon-user"></i>
+                    </b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="text" class="form-control" placeholder="Username" v-model="username" autocomplete="username" />
+                  <b-form-input
+                    type="text"
+                    class="form-control"
+                    placeholder="نام کاربری"
+                    v-model="username"
+                    autocomplete="username"
+                  />
+                </b-input-group>
+                  
+                <b-input-group class="mb-3">
+                  <b-input-group-prepend>
+                  <b-input-group-text>
+                     <i class="cil-happy"></i>
+                  </b-input-group-text>
+
+                  </b-input-group-prepend>
+                  <b-form-input
+                    type="text"
+                    class="form-control"
+                    placeholder="نام"
+                    v-model="first_name"
+                  
+                  />
+                </b-input-group>
+               
+                <b-input-group class="mb-3">
+                  <b-input-group-prepend>
+                      <b-input-group-text>
+                     <i class="cil-face"></i>
+                  </b-input-group-text>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    type="text"
+                    class="form-control"
+                    placeholder="نام خانوادگی"
+                    v-model="last_name"
+                  
+                  />
                 </b-input-group>
 
+                 <b-input-group class="mb-3">
+                  <b-input-group-prepend>
+                     <b-input-group-text>@</b-input-group-text>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    type="text"
+                    class="form-control"
+                    placeholder="ایمیل شرکتی"
+                    v-model="email"
+                    autocomplete="email"
+                  />
+                 </b-input-group>
+                   <b-input-group class="mb-3">
+                  <b-input-group-prepend>
+                   <b-input-group-text>
+                     <i class="cil-building"></i>
+                  </b-input-group-text>
+                  </b-input-group-prepend>
+                  <b-form-input
+                    type="text"
+                    class="form-control"
+                    placeholder="محل ثبت سازمان"
+                    v-model="location"
+                 
+                  />
+               </b-input-group>
+               </b-input-group>
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
-                    <b-input-group-text>@</b-input-group-text>
+                     <b-input-group-text><i class="cil-screen-smartphone"></i></b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="text" class="form-control" placeholder="Email" v-model="email" autocomplete="email" />
-                </b-input-group>
-
+                  <b-form-input
+                    type="text"
+                    class="form-control"
+                    placeholder="شماره همراه"
+                    v-model="phone_num"
+                 
+                  />
+               </b-input-group>
                 <b-input-group class="mb-3">
                   <b-input-group-prepend>
-                    <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
+                    <b-input-group-text>
+                      <i class="icon-lock"></i>
+                    </b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="password" class="form-control" placeholder="Password" v-model="password" autocomplete="new-password" />
+                  <b-form-input
+                    type="password"
+                    class="form-control"
+                    placeholder="گذر واژه"
+                    v-model="password"
+                    autocomplete="new-password"
+                  />
                 </b-input-group>
 
                 <b-input-group class="mb-4">
                   <b-input-group-prepend>
-                    <b-input-group-text><i class="icon-lock"></i></b-input-group-text>
+                    <b-input-group-text>
+                      <i class="icon-lock"></i>
+                    </b-input-group-text>
                   </b-input-group-prepend>
-                  <b-form-input type="password" class="form-control" placeholder="Repeat password" v-model="repPassword" autocomplete="new-password" />
+                  <b-form-input
+                    type="password"
+                    class="form-control"
+                    placeholder="تکرار گذر واژه"
+                    v-model="repPassword"
+                    autocomplete="new-password"
+                  />
                 </b-input-group>
+                <div class="mb-4" >
 
-                <b-button variant="success" @click="signup" block>Create Account</b-button>
+
+                </div>
+
+                <b-button variant="success" @click="signup" block>ساختن حساب کاربری</b-button>
               </b-form>
             </b-card-body>
-            <b-card-footer class="p-4">
-              <b-row>
-                <b-col cols="6">
-                  <b-button block class="btn btn-facebook"><span>facebook</span></b-button>
-                </b-col>
-                <b-col cols="6">
-                  <b-button block class="btn btn-twitter" type="button"><span>twitter</span></b-button>
-                </b-col>
-              </b-row>
-            </b-card-footer>
+          
           </b-card>
         </b-col>
       </b-row>
     </div>
     <div v-if="message" class="alert alert-primary" role="alert">
-  This is a primary alert with <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
-</div>
+      This is a primary alert with
+      <a href="#" class="alert-link">an example link</a>. Give it a click if you like.
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import FileSelect from "../widgets/FileSelector"
+import { mapState, mapActions } from "vuex";
 export default {
-  name: 'Register',
-    data(){
-            return {
-                username : "",
-                password : "",
-                repPassword : "",
-                email : "",
-                message : false,
-                
-            }
-        },
-        computed: {
-            ...mapState([
-                'accessToken'
-            ])
-        },
-        methods : {
-          signup(){
-            console.log("here")
-              this.$store.dispatch("doSignup",{"username" : this.username , "password" : this.password , "email" : this.email})
-              .then(Response => {
-                this.$store.dispatch("doLogin",{"username" : Response.username , "password" : Response.password})
-                .then(() => {
-                    this.$router.push({ name: "Home" });
-                })
-                .catch(error => {
-              
-                   alert(error.message)
+  name: "Register",
+  data() {
+    return {
+      username: "",
+      password: "",
+      repPassword: "",
+      email: "",
+      first_name:"",
+      last_name:"",
+      phone_num:null,
+      message: false,
+      signingUp:false,
+      location:"",
+    };
+  },
+  computed: {
+    ...mapState(["accessToken"])
+  },
+  methods: {
+    goBack() {
+      this.$router.push({ name: "Login" });
+    },
+    signup() {
+       this.signingUp = true
+      this.$store
+        .dispatch("doSignup", {
+          userName: this.username,
+          password: this.password,
+          email: this.email,
+          name:this.first_name + " " + this.last_name,
+          location: this.location,
+          phoneNumber:this.phone_num
 
-                })
-
-              })
-              .catch(() => {
-
-              })
-          }
-        }
-}
+        })
+        .then(Response => {
+            this.signingUp = false
+          this.$store
+            .dispatch("doLogin", {
+              username: this.username,
+              password: this.password,
+             
+            })
+            .then(() => {
+              this.$router.push({ name: "Home" });
+            })
+              this.signingUp = false
+            .catch(error => {
+              alert(error.message);
+            });
+        })
+        .catch(() => {});
+    }
+  }
+};
 </script>
