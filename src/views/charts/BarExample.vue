@@ -1,19 +1,55 @@
 <script>
-import { Bar } from 'vue-chartjs'
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips'
+import { Bar } from "vue-chartjs";
+import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
 
 export default {
   extends: Bar,
-  mounted () {
+  data: function() {
+    return {
+      symbols: []
+    };
+  },
+  props: ["cdata"],
+  methods: {
+    checkProp() {
+      const vm = this;
+      const zeroArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      if (vm.cdata && Array.isArray(vm.cdata)) {
+        if (vm.cdata.length > 0) {
+          return vm.cdata;
+        } else {
+          return zeroArray;
+        }
+      } else {
+        return zeroArray;
+      }
+    }
+  },
+  mounted() {
     // Overwriting base render method with actual data.
+    let vm = this;
     this.renderChart(
       {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        labels: [
+          "",
+          "فروردین",
+          "اردی‌بهشت",
+          "خرداد",
+          "تیر",
+          "مرداد",
+          "شهریور",
+          "مهر",
+          "آبان",
+          "آذر",
+          "دی",
+          "بهمن",
+          "اسفند"
+        ],
         datasets: [
           {
-            label: 'GitHub Commits',
-            backgroundColor: '#f87979',
-            data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+            label: "درآمد ماهیانه",
+            backgroundColor: "#f87979",
+            data: [0, ...this.checkProp()]
           }
         ]
       },
@@ -24,16 +60,20 @@ export default {
           enabled: false,
           custom: CustomTooltips,
           intersect: true,
-          mode: 'index',
-          position: 'nearest',
+          min: 0,
+          mode: "index",
+          position: "nearest",
           callbacks: {
-            labelColor: function (tooltipItem, chart) {
-              return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].backgroundColor }
+            labelColor: function(tooltipItem, chart) {
+              return {
+                backgroundColor:
+                  chart.data.datasets[tooltipItem.datasetIndex].backgroundColor
+              };
             }
           }
         }
       }
-    )
+    );
   }
-}
+};
 </script>
