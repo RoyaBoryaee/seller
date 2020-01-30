@@ -29,18 +29,22 @@ export default {
   },
   data: function() {
     return {
-      cdata: [1,2,3]
+      cdata: []
     };
   },
   methods: {
     fetchData() {
       try {
+        const token = localStorage.getItem('accessToken') || '';
         const start = format(new Date(Date.now()), "yyyy-MM-dd");
         const end = format(addYears(new Date(Date.now()), 1), "yyyy-MM-dd");
         const qs = queryString.stringify({ start, end });
         axios({
           url: `http://198.143.182.157/api/salesmans/GetFinancialReport?${qs}`,
-          method: "post"
+          method: "post",
+          headers: {
+            authorization: 'Bearer ' + token
+          }
         })
           .then(response => {
             this.cdata = Object.values(response.data);
