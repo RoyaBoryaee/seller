@@ -391,9 +391,7 @@ const router = new Router({
   ],
 });
 router.beforeEach((to, from, next) => {
-  console.log('hello', to);
   if (to.name === 'Dashboard') {
-    console.log(store.getters['isLoggedIn'], 'fuuucl');
     if (store.getters['isLoggedIn']) {
       next();
     } else {

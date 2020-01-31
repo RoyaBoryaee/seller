@@ -82,7 +82,6 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-
 export default {
   name: "Login",
   data() {
@@ -91,9 +90,6 @@ export default {
       Password: "",
       submitted: false
     };
-  },
-  computed: {
-    ...mapState(["loggingIn", "loginError", "accessToken"])
   },
   methods: {
     loginSubmit() {

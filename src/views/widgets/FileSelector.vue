@@ -1,22 +1,46 @@
 <template>
   <label class="file-select">
     <div class="select-button">
-      <span v-if="value">Selected File: {{value.name}}</span>
-      <span v-else>Select File</span>
+      <span v-if="value">{{value.name}}</span>
+      <span v-else>انتخاب فایل</span>
     </div>
-    <input type="file" @change="handleFileChange"/>
+    <input type="file" @change="handleFileChange" />
   </label>
 </template>
 
 <script>
 export default {
   props: {
-    value: File
+    value: File,
+   
   },
-
+data(){
+  return{
+    base64:"",
+  }
+},
   methods: {
-    handleFileChange(e) {
-      this.$emit('input', e.target.files[0])
+   
+  
+   async handleFileChange(e) {
+      let file= e.target.files[0];
+       this.$emit('input', file)
+      this.name = file.name;
+      let toBase64= rawfile => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+    })
+    toBase64(file)
+    .then(data => {
+     
+           this.$emit("base64", data)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+   
     }
   }
 }
@@ -27,9 +51,9 @@ export default {
   padding: 1rem;
 
   color: white;
-  background-color: #2EA169;
+  background-color: #2ea169;
 
-  border-radius: .3rem;
+  border-radius: 0.3rem;
 
   text-align: center;
   font-weight: bold;

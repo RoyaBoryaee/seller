@@ -126,8 +126,14 @@
                     autocomplete="new-password"
                   />
                 </b-input-group>
-                <div class="mb-4" >
 
+                <div class="mb-4" >
+                  <label style="display:inline;padding:5px">انتخاب عکس احراز هویت</label>
+                        <file-select @base64="getbase64id" style="display:inline" v-model="idfile"></file-select>
+    <p v-if="idfile">{{idfile.name}}</p>
+     <label style="display:inline;padding:5px">انتخاب عکس پروفایل </label>
+        <file-select style="display:inline" @base64="getbase64profile" v-model="profilefile"></file-select>
+    <p v-if="profilefile">{{profilefile.name}}</p>
 
                 </div>
 
@@ -151,6 +157,9 @@ import FileSelect from "../widgets/FileSelector"
 import { mapState, mapActions } from "vuex";
 export default {
   name: "Register",
+  components:{
+    FileSelect
+  },
   data() {
     return {
       username: "",
@@ -163,6 +172,10 @@ export default {
       message: false,
       signingUp:false,
       location:"",
+      idfile:null,
+      base64IdFile:"",
+      profilefile:null,
+      base64ProfileFile:"",
     };
   },
   computed: {
@@ -171,6 +184,12 @@ export default {
   methods: {
     goBack() {
       this.$router.push({ name: "Login" });
+    },
+    getbase64id(value){
+        this.base64IdFile = value;
+    },
+    getbase64profile(value){
+        this.base64ProfileFile = value;
     },
     signup() {
        this.signingUp = true
@@ -193,7 +212,7 @@ export default {
              
             })
             .then(() => {
-              this.$router.push({ name: "Home" });
+               this.$router.push({ name: "Home" });
             })
               this.signingUp = false
             .catch(error => {
