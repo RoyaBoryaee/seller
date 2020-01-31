@@ -130,10 +130,10 @@
                 <div class="mb-4" >
                   <label style="display:inline;padding:5px">انتخاب عکس احراز هویت</label>
                         <file-select @base64="getbase64id" style="display:inline" v-model="idfile"></file-select>
-    <p v-if="idfile">{{idfile.name}}</p>
+    
      <label style="display:inline;padding:5px">انتخاب عکس پروفایل </label>
         <file-select style="display:inline" @base64="getbase64profile" v-model="profilefile"></file-select>
-    <p v-if="profilefile">{{profilefile.name}}</p>
+  
 
                 </div>
 

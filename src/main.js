@@ -14,6 +14,12 @@ import Axios from 'axios';
 // cssVars()
 Vue.prototype.$http = Axios;
 Vue.prototype.$http.defaults.baseURL = process.env.VUE_APP_ROOT_API;
+const accessToken = localStorage.getItem('accessToken');
+if (accessToken) {
+  Vue.prototype.$http.defaults.headers.common[
+    'Authorization'
+  ] = `Bearer ${accessToken}`;
+}
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 
