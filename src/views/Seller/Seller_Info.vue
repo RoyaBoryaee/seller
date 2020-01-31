@@ -1,5 +1,5 @@
 <template>
-  <div class>
+  <div class dir="rtl">
     <b-card>
       <b-card-header>فروشندگان</b-card-header>
       <b-card-body>
@@ -16,17 +16,17 @@
             <div class="col">
               <input
                 type="text"
-                v-model="currentSalesman.name.split(' ')[0]"
+                v-model="currentSalesman.name"
                 class="form-control"
-                placeholder="نام"
+                placeholder=" نام و نام خانوادگی"
               />
             </div>
             <div class="col">
               <input
                 type="text"
-                v-model="currentSalesman.name.split(' ')[1]"
+                v-model="currentSalesman.email"
                 class="form-control"
-                placeholder="نام خوانوادگی"
+                placeholder="ایمیل"
               />
             </div>
           </div>
