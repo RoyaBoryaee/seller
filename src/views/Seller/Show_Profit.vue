@@ -29,7 +29,7 @@ export default {
   },
   data: function() {
     return {
-      cdata: []
+      cdata: [1,20,3,40,5,4,0,9,10,15,33,28]
     };
   },
   methods: {
