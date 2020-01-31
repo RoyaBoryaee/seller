@@ -17,7 +17,7 @@
 <script>
 import axios from "axios";
 import queryString from "query-string";
-import { format, addYears } from "date-fns";
+import { format, subYears } from "date-fns";
 import SocialBoxChartExample from "../dashboard/SocialBoxChartExample";
 import BarExample from "../charts/BarExample";
 
@@ -29,18 +29,22 @@ export default {
   },
   data: function() {
     return {
-      cdata: [1,2,3]
+      cdata: [1,20,3,40,5,4,0,9,10,15,33,28]
     };
   },
   methods: {
     fetchData() {
       try {
-        const start = format(new Date(Date.now()), "yyyy-MM-dd");
-        const end = format(addYears(new Date(Date.now()), 1), "yyyy-MM-dd");
+        const token = localStorage.getItem('accessToken') || '';
+        const start = format(subYears(new Date(Date.now()), 1), "yyyy-MM-dd");
+        const end = format(new Date(Date.now()), "yyyy-MM-dd");
         const qs = queryString.stringify({ start, end });
         axios({
           url: `http://198.143.182.157/api/salesmans/GetFinancialReport?${qs}`,
-          method: "post"
+          method: "post",
+          headers: {
+            authorization: 'Bearer ' + token
+          }
         })
           .then(response => {
             this.cdata = Object.values(response.data);
