@@ -1,7 +1,7 @@
 <template>
   <div class dir="rtl">
     <b-card>
-      <b-card-header>فروشندگان</b-card-header>
+      <b-card-header style="text-align: center">فروشندگان</b-card-header>
       <b-card-body>
         <div
           style="margin-left:50%"
@@ -67,22 +67,33 @@
             </div>
           </div>
           <div class="row form-item">
-            <div class="col">
-              <label style="display:inline;padding:5px">انتخاب عکس پروفایل</label>
+            <div class="col" style="text-align: center">
+              <label style="display:inline;padding:5px;display: table-row-group"
+                >انتخاب عکس پروفایل</label
+              >
               <img width="300" :src="currentSalesman.profileImage" />
-
-              <file-select style="display:inline" @base64="getbase64profile" v-model="profilefile"></file-select>
+              <br />
+              <br />
+              <file-select
+                style="display:inline"
+                @base64="getbase64profile"
+                v-model="profilefile"
+              ></file-select>
             </div>
-            <div class="col">
-              <label style="display:inline;padding:5px">انتخاب عکس احراز هویت</label>
+            <div class="col" style=" text-align: center;direction: rtl;">
+              <label>انتخاب عکس احراز هویت</label>
               <img width="300" :src="currentSalesman.identificationImage" />
-
-              <file-select @base64="getbase64id" style="display:inline" v-model="idfile"></file-select>
+              <file-select @base64="getbase64id" v-model="idfile"></file-select>
             </div>
           </div>
 
           <div class="col">
-            <b-button style="float:right;width:20%;" variant="success" @click="editSalesMan" block>
+            <b-button
+              style="float:left;width:20%;"
+              variant="success"
+              @click="editSalesMan"
+              block
+            >
               <!-- <span v-if="editingSeller" class="spinner-border text-info" role="status">
                 <span class="sr-only">Loading...</span>
               </span>
@@ -114,7 +125,7 @@ export default {
       profilefile: null,
       loadingSeller: false,
       editingSeller: false,
-      password:""
+      password: ""
     };
   },
   methods: {
@@ -126,7 +137,7 @@ export default {
     },
     editSalesMan() {
       this.editingSeller = true;
-      this.currentSalesman.password= this.password;
+      this.currentSalesman.password = this.password;
       this.$store
         .dispatch("editSalesMan", this.currentSalesman)
         .then(() => {

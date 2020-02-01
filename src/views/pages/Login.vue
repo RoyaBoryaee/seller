@@ -1,5 +1,5 @@
 <template>
-  <div dir="rtl" class="app flex-row align-items-center">
+  <div  class="app flex-row align-items-center">
     <div class="container">
       <b-row class="justify-content-center">
         <b-col md="8">
@@ -7,8 +7,8 @@
             <b-card no-body class="p-4">
               <b-card-body>
                 <b-form>
-                  <h1>ورود</h1>
-                  <p class="text-muted">به اکانت خود وارد شوید</p>
+                  <h1 style="direction: rtl;text-align: center">ورود</h1>
+                  <p class="text-muted"  style="direction: rtl;text-align: right">به اکانت خود وارد شوید</p>
                   <b-input-group class="mb-3">
                     <b-input-group-prepend
                       ><b-input-group-text
